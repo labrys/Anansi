@@ -21,7 +21,8 @@ def get_version():
         version = get_distribution(__name__).version
     except (DistributionNotFound, RequirementParseError):
         log.warning('Could not get version from installation.')
-        root = '../..'
-        here = os
-        path = os.path.join()
-        return setuptools_scm.get_version(root)
+        relative_root = '../..'
+        here = os.path.dirname(__file__)
+        root = os.path.join(here, relative_root)
+        absolute_root = os.path.abspath(root)
+        return setuptools_scm.get_version(absolute_root)
